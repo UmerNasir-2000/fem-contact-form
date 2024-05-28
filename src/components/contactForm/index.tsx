@@ -6,16 +6,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const contactFormSchema = z.object({
   firstName: z
     .string()
+    .min(1, "This field is required")
     .min(3, { message: "First name must be at least 3 characters" }),
   lastName: z
     .string()
+    .min(1, "This field is required")
     .min(3, { message: "Last name must be at least 3 characters" }),
-  email: z.string().email({ message: "Invalid email" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
   supportType: z.enum(["generalEnquiry", "supportRequest"]),
   message: z
     .string()
+    .min(1, "This field is required")
     .min(30, { message: "Message must be at least 30 characters" }),
-  consent: z.boolean(),
+  consent: z.boolean().refine((value) => value === true, {
+    message: "To submit this form, please consent to being contacted",
+  }),
 });
 
 type ContactFormType = z.infer<typeof contactFormSchema>;
@@ -56,7 +61,7 @@ const ContactForm = () => {
               {...register("firstName", { required: true })}
               type="text"
               id="firstName"
-              required
+              // required
               className={`w-full px-4 p-2 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                 errors.firstName && "border-red focus:border-red"
               }`}
@@ -76,7 +81,7 @@ const ContactForm = () => {
               {...register("lastName", { required: true })}
               type="text"
               id="lastName"
-              required
+              // required
               className={`px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                 errors.lastName && "border-red focus:border-red"
               }`}
@@ -96,7 +101,7 @@ const ContactForm = () => {
               {...register("email", { required: true })}
               type="email"
               id="email"
-              required
+              // required
               className={`px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                 errors.email && "border-red focus:border-red"
               }`}
@@ -118,7 +123,7 @@ const ContactForm = () => {
                   {...register("supportType", { required: true })}
                   type="radio"
                   id="generalEnquiry"
-                  required
+                  // required
                   className={`px-4 p-2 size-4 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                     errors.firstName && "border-red focus:border-red"
                   }`}
@@ -135,7 +140,7 @@ const ContactForm = () => {
                   {...register("supportType", { required: true })}
                   type="radio"
                   id="supportRequest"
-                  required
+                  // required
                   className={`px-4 p-2 size-4 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                     errors.lastName && "border-red focus:border-red"
                   }`}
@@ -157,7 +162,7 @@ const ContactForm = () => {
           <textarea
             id="message"
             {...register("message", { required: true })}
-            required
+            // required
             className={`px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
               errors.message && "border-red focus:border-red"
             }`}
@@ -167,18 +172,22 @@ const ContactForm = () => {
             <p className="text-sm text-red">{errors.message.message}</p>
           )}
         </div>
-
-        <div className="flex items-center gap-x-3">
-          <input
-            id="consent"
-            type="checkbox"
-            required
-            {...register("consent", { required: true })}
-          />
-          <label htmlFor="consent" className="text-grey-900 text-sm">
-            I consent to being contacted by the team
-            <span className="text-green-700 ml-1 font-bold">*</span>
-          </label>
+        <div className="space-y-2">
+          <div className="flex items-center gap-x-3">
+            <input
+              id="consent"
+              type="checkbox"
+              // required
+              {...register("consent", { required: true })}
+            />
+            <label htmlFor="consent" className="text-grey-900 text-sm">
+              I consent to being contacted by the team
+              <span className="text-green-700 ml-1 font-bold">*</span>
+            </label>
+          </div>
+          {errors.consent && (
+            <p className="text-sm text-red">{errors.consent.message}</p>
+          )}
         </div>
 
         <div className="mt-3">
