@@ -11,6 +11,7 @@ const contactFormSchema = z.object({
     .string()
     .min(3, { message: "Last name must be at least 3 characters" }),
   email: z.string().email({ message: "Invalid email" }),
+  supportType: z.enum(["generalEnquiry", "supportRequest"]),
   message: z
     .string()
     .min(30, { message: "Message must be at least 30 characters" }),
@@ -103,6 +104,49 @@ const ContactForm = () => {
             {errors.email && (
               <p className="text-sm text-red">{errors.email.message}</p>
             )}
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="message" className="block font-medium text-gray-900">
+            Query Type <span className="text-green-700 font-bold ml-1">*</span>
+          </label>
+          <div className="flex gap-3 my-3">
+            <div className="space-y-2 w-1/2">
+              <div className="flex items-center border border-grey-500 rounded-md">
+                <input
+                  {...register("supportType", { required: true })}
+                  type="radio"
+                  id="generalEnquiry"
+                  required
+                  className={`w-full px-4 p-2 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
+                    errors.firstName && "border-red focus:border-red"
+                  }`}
+                />
+                <label htmlFor="generalEnquiry">General Enquiry</label>
+              </div>
+              {errors.firstName && (
+                <p className="text-sm text-red">{errors.firstName.message}</p>
+              )}
+            </div>
+            <div className="space-y-2 w-1/2">
+              <div className="flex items-center border border-grey-500 rounded-md">
+                <input
+                  {...register("supportType", { required: true })}
+                  type="radio"
+                  id="supportRequest"
+                  required
+                  className={`px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
+                    errors.lastName && "border-red focus:border-red"
+                  }`}
+                />
+                <label htmlFor="supportRequest">Support Request</label>
+              </div>
+
+              {errors.lastName && (
+                <p className="text-sm text-red">{errors.lastName.message}</p>
+              )}
+            </div>
           </div>
         </div>
 
