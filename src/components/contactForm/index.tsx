@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const contactFormSchema = z.object({
   firstName: z.string().min(3),
@@ -13,7 +14,14 @@ const contactFormSchema = z.object({
 type ContactFormType = z.infer<typeof contactFormSchema>;
 
 const ContactForm = () => {
-  const { register, handleSubmit, reset } = useForm<ContactFormType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormType>({
+    resolver: zodResolver(contactFormSchema),
+  });
 
   const onSubmit = useCallback((data: any) => {
     console.log("data :>> ", data);
@@ -42,8 +50,13 @@ const ContactForm = () => {
               type="text"
               id="firstName"
               required
-              className="w-full px-4 p-2 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
+              className={`w-full px-4 p-2 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
+                errors.firstName && "border-red-500"
+              }`}
             />
+            {errors.firstName && (
+              <p className="text-sm text-red">{errors.firstName.message}</p>
+            )}
           </div>
           <div className="space-y-2 w-1/2">
             <label
@@ -59,6 +72,9 @@ const ContactForm = () => {
               required
               className="px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
             />
+            {errors.lastName && (
+              <p className="text-sm text-red">{errors.lastName.message}</p>
+            )}
           </div>
         </div>
         <div>
@@ -74,6 +90,9 @@ const ContactForm = () => {
               required
               className="px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
             />
+            {errors.email && (
+              <p className="text-sm text-red">{errors.email.message}</p>
+            )}
           </div>
         </div>
 
@@ -88,6 +107,9 @@ const ContactForm = () => {
             className="px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
             rows={3}
           />
+          {errors.message && (
+            <p className="text-sm text-red">{errors.message.message}</p>
+          )}
         </div>
 
         <div className="flex items-center gap-x-3">
