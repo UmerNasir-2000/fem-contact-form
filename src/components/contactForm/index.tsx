@@ -9,7 +9,8 @@ const ContactForm = () => {
               htmlFor="firstName"
               className="block font-medium text-gray-900"
             >
-              First Name <span className="text-green-700">*</span>
+              First Name{" "}
+              <span className="text-green-700 font-bold ml-1">*</span>
             </label>
             <input
               type="text"
@@ -22,7 +23,7 @@ const ContactForm = () => {
               htmlFor="lastName"
               className="block font-medium text-gray-900"
             >
-              Last Name <span className="text-green-700">*</span>
+              Last Name <span className="text-green-700 font-bold ml-1">*</span>
             </label>
             <input
               type="text"
@@ -34,7 +35,8 @@ const ContactForm = () => {
         <div>
           <div className="space-y-2 w-full">
             <label htmlFor="email" className="block font-medium text-gray-900">
-              Email Address <span className="text-green-700">*</span>
+              Email Address{" "}
+              <span className="text-green-700 font-bold ml-1">*</span>
             </label>
             <input
               type="email"
@@ -46,7 +48,7 @@ const ContactForm = () => {
 
         <div className="space-y-2">
           <label htmlFor="message" className="block font-medium text-gray-900">
-            Message <span className="text-green-700">*</span>
+            Message <span className="text-green-700 font-bold ml-1">*</span>
           </label>
           <textarea
             id="message"
@@ -59,7 +61,7 @@ const ContactForm = () => {
           <input id="consent" type="checkbox" />
           <label htmlFor="consent" className="text-grey-900 text-sm">
             I consent to being contacted by the team{" "}
-            <span className="text-green-700">*</span>
+            <span className="text-green-700 ml-1 font-bold">*</span>
           </label>
         </div>
 
