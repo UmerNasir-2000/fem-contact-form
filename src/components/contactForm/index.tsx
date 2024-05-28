@@ -113,13 +113,13 @@ const ContactForm = () => {
           </label>
           <div className="flex gap-3 my-3">
             <div className="space-y-2 w-1/2">
-              <div className="flex items-center border border-grey-500 rounded-md p-3 gap-x-3">
+              <div className="flex items-center border border-grey-500 rounded-md p-3 pl-4 gap-x-3">
                 <input
                   {...register("supportType", { required: true })}
                   type="radio"
                   id="generalEnquiry"
                   required
-                  className={`px-4 p-2 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
+                  className={`px-4 p-2 size-4 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                     errors.firstName && "border-red focus:border-red"
                   }`}
                 />
@@ -130,13 +130,13 @@ const ContactForm = () => {
               )}
             </div>
             <div className="space-y-2 w-1/2">
-              <div className="flex items-center border border-grey-500 rounded-md p-3 gap-x-3">
+              <div className="flex items-center border border-grey-500 rounded-md p-3 pl-4 gap-x-3">
                 <input
                   {...register("supportType", { required: true })}
                   type="radio"
                   id="supportRequest"
                   required
-                  className={`px-4 p-2 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
+                  className={`px-4 p-2 size-4 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                     errors.lastName && "border-red focus:border-red"
                   }`}
                 />
