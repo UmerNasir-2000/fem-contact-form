@@ -14,7 +14,11 @@ const contactFormSchema = z.object({
     .min(1, "This field is required")
     .min(3, { message: "Last name must be at least 3 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
-  supportType: z.enum(["generalEnquiry", "supportRequest"]),
+  supportType: z
+    .enum(["generalEnquiry", "supportRequest"])
+    .refine((value) => value !== null, {
+      message: "Please select a query type",
+    }),
   message: z
     .string()
     .min(1, "This field is required")
@@ -36,9 +40,8 @@ const ContactForm = () => {
     resolver: zodResolver(contactFormSchema),
   });
 
-  const onSubmit = useCallback((data: any) => {
-    console.log("data :>> ", data);
-    console.log(`Submitted..`);
+  const onSubmit = useCallback((data: ContactFormType) => {
+    console.log(data);
     reset();
     toast.success("You will be contacted shortly!");
   }, []);
@@ -63,7 +66,7 @@ const ContactForm = () => {
               {...register("firstName", { required: true })}
               type="text"
               id="firstName"
-              // required
+              autoComplete="off"
               className={`w-full px-4 p-2 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                 errors.firstName && "border-red focus:border-red"
               }`}
@@ -83,7 +86,7 @@ const ContactForm = () => {
               {...register("lastName", { required: true })}
               type="text"
               id="lastName"
-              // required
+              autoComplete="off"
               className={`px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                 errors.lastName && "border-red focus:border-red"
               }`}
@@ -103,7 +106,7 @@ const ContactForm = () => {
               {...register("email", { required: true })}
               type="email"
               id="email"
-              // required
+              autoComplete="off"
               className={`px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                 errors.email && "border-red focus:border-red"
               }`}
