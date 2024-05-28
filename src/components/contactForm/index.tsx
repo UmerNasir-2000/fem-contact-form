@@ -170,7 +170,7 @@ const ContactForm = () => {
             id="message"
             {...register("message", { required: true })}
             // required
-            className={`px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
+            className={`px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none resize-none ${
               errors.message && "border-red focus:border-red"
             }`}
             rows={3}
@@ -186,7 +186,7 @@ const ContactForm = () => {
               type="checkbox"
               // required
               {...register("consent", { required: true })}
-              className="accent-green-700 size-4"
+              className=" accent-green-700 size-4"
             />
             <label htmlFor="consent" className="text-grey-900 text-sm">
               I consent to being contacted by the team
