@@ -130,7 +130,7 @@ const ContactForm = () => {
                   id="generalEnquiry"
                   value="generalEnquiry"
                   // required
-                  className={`px-4 p-2 size-4 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
+                  className={`px-4 p-2 size-4 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none accent-green-700 ${
                     errors.firstName && "border-red focus:border-red"
                   }`}
                 />
@@ -148,7 +148,7 @@ const ContactForm = () => {
                   id="supportRequest"
                   value="supportRequest"
                   // required
-                  className={`px-4 p-2 size-4 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
+                  className={`px-4 p-2 size-4 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none accent-green-700 ${
                     errors.lastName && "border-red focus:border-red"
                   }`}
                 />
