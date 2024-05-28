@@ -57,7 +57,7 @@ const ContactForm = () => {
               id="firstName"
               required
               className={`w-full px-4 p-2 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
-                errors.firstName && "border-red-500"
+                errors.firstName && "border-red focus:border-red"
               }`}
             />
             {errors.firstName && (
@@ -76,7 +76,9 @@ const ContactForm = () => {
               type="text"
               id="lastName"
               required
-              className="px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
+              className={`px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
+                errors.lastName && "border-red focus:border-red"
+              }`}
             />
             {errors.lastName && (
               <p className="text-sm text-red">{errors.lastName.message}</p>
@@ -94,7 +96,9 @@ const ContactForm = () => {
               type="email"
               id="email"
               required
-              className="px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
+              className={`px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
+                errors.email && "border-red focus:border-red"
+              }`}
             />
             {errors.email && (
               <p className="text-sm text-red">{errors.email.message}</p>
@@ -110,7 +114,9 @@ const ContactForm = () => {
             id="message"
             {...register("message", { required: true })}
             required
-            className="px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
+            className={`px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
+              errors.message && "border-red focus:border-red"
+            }`}
             rows={3}
           />
           {errors.message && (
