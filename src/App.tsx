@@ -1,8 +1,10 @@
+import ContactForm from "./components/contactForm";
+
 function App() {
   return (
-    <div className="text-3xl font-bold underline">
-      Frontend Mentor - Contact Form Challenge
-    </div>
+    <section className="min-h-screen flex justify-center items-center">
+      <ContactForm />
+    </section>
   );
 }
 
