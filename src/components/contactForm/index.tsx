@@ -15,7 +15,8 @@ const ContactForm = () => {
             <input
               type="text"
               id="firstName"
-              className="w-full p-2 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
+              required
+              className="w-full px-4 p-2 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
             />
           </div>
           <div className="space-y-2 w-1/2">
@@ -28,7 +29,8 @@ const ContactForm = () => {
             <input
               type="text"
               id="lastName"
-              className="p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
+              required
+              className="px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
             />
           </div>
         </div>
@@ -41,7 +43,8 @@ const ContactForm = () => {
             <input
               type="email"
               id="email"
-              className="p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
+              required
+              className="px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
             />
           </div>
         </div>
@@ -52,15 +55,16 @@ const ContactForm = () => {
           </label>
           <textarea
             id="message"
-            className="p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
+            required
+            className="px-4 p-2 w-full rounded-md border border-grey-500 focus:border-green-700 focus:outline-none"
             rows={3}
           />
         </div>
 
         <div className="flex items-center gap-x-3">
-          <input id="consent" type="checkbox" />
+          <input id="consent" type="checkbox" required />
           <label htmlFor="consent" className="text-grey-900 text-sm">
-            I consent to being contacted by the team{" "}
+            I consent to being contacted by the team
             <span className="text-green-700 ml-1 font-bold">*</span>
           </label>
         </div>
