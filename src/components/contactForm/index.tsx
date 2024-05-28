@@ -1,8 +1,19 @@
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const contactFormSchema = z.object({
+  firstName: z.string().min(3),
+  lastName: z.string().min(3),
+  email: z.string().email(),
+  message: z.string().min(30),
+  consent: z.boolean(),
+});
+
+type ContactFormType = z.infer<typeof contactFormSchema>;
 
 const ContactForm = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm<ContactFormType>();
 
   const onSubmit = useCallback((data: any) => {
     console.log("data :>> ", data);
