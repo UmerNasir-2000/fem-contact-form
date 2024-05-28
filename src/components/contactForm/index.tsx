@@ -4,10 +4,16 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const contactFormSchema = z.object({
-  firstName: z.string().min(3),
-  lastName: z.string().min(3),
-  email: z.string().email(),
-  message: z.string().min(30),
+  firstName: z
+    .string()
+    .min(3, { message: "First name must be at least 3 characters" }),
+  lastName: z
+    .string()
+    .min(3, { message: "Last name must be at least 3 characters" }),
+  email: z.string().email({ message: "Invalid email" }),
+  message: z
+    .string()
+    .min(30, { message: "Message must be at least 30 characters" }),
   consent: z.boolean(),
 });
 
@@ -18,7 +24,7 @@ const ContactForm = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<ContactFormType>({
     resolver: zodResolver(contactFormSchema),
   });
@@ -126,7 +132,10 @@ const ContactForm = () => {
         </div>
 
         <div className="mt-3">
-          <button className="bg-green-600 text-white w-full px-2 py-3 rounded-md transition-opacity hover:bg-green-600/70">
+          <button
+            disabled={isSubmitting}
+            className="bg-green-600 text-white w-full px-2 py-3 rounded-md transition-opacity hover:bg-green-600/70"
+          >
             Submit
           </button>
         </div>
