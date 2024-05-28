@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
 
 const contactFormSchema = z.object({
   firstName: z
@@ -39,6 +40,7 @@ const ContactForm = () => {
     console.log("data :>> ", data);
     console.log(`Submitted..`);
     reset();
+    toast.success("You will be contacted shortly!");
   }, []);
 
   return (
@@ -123,6 +125,7 @@ const ContactForm = () => {
                   {...register("supportType", { required: true })}
                   type="radio"
                   id="generalEnquiry"
+                  value="generalEnquiry"
                   // required
                   className={`px-4 p-2 size-4 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                     errors.firstName && "border-red focus:border-red"
@@ -130,8 +133,8 @@ const ContactForm = () => {
                 />
                 <label htmlFor="generalEnquiry">General Enquiry</label>
               </div>
-              {errors.firstName && (
-                <p className="text-sm text-red">{errors.firstName.message}</p>
+              {errors.supportType && (
+                <p className="text-sm text-red">{errors.supportType.message}</p>
               )}
             </div>
             <div className="space-y-2 w-1/2">
@@ -140,6 +143,7 @@ const ContactForm = () => {
                   {...register("supportType", { required: true })}
                   type="radio"
                   id="supportRequest"
+                  value="supportRequest"
                   // required
                   className={`px-4 p-2 size-4 rounded-md border border-grey-500 focus:border-green-700 focus:outline-none ${
                     errors.lastName && "border-red focus:border-red"
@@ -148,8 +152,8 @@ const ContactForm = () => {
                 <label htmlFor="supportRequest">Support Request</label>
               </div>
 
-              {errors.lastName && (
-                <p className="text-sm text-red">{errors.lastName.message}</p>
+              {errors.supportType && (
+                <p className="text-sm text-red">{errors.supportType.message}</p>
               )}
             </div>
           </div>
@@ -179,6 +183,7 @@ const ContactForm = () => {
               type="checkbox"
               // required
               {...register("consent", { required: true })}
+              className="accent-green-700 size-4"
             />
             <label htmlFor="consent" className="text-grey-900 text-sm">
               I consent to being contacted by the team
