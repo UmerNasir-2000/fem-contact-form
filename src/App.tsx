@@ -1,5 +1,9 @@
 function App() {
-  return <>Frontend Mentor - Contact Form Challenge</>;
+  return (
+    <div className="text-3xl font-bold underline">
+      Frontend Mentor - Contact Form Challenge
+    </div>
+  );
 }
 
 export default App;
